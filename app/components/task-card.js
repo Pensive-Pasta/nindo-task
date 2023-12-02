@@ -1,6 +1,6 @@
 const TaskCard = ({ task }) => {
     return (
-        <div className="bg-white p-4 rounded-lg shadow-md mb-2 flex justify-between items-center w-full md:min-w-[700px]">
+        <div className="bg-white p-4 rounded-lg shadow-md mb-2 flex justify-between items-center md:min-w-[700px]">
             <div>
                 <h3 className="text-lg font-semibold text-black">{task.title}</h3>
                 <p className="text-gray-500">{task.date}</p>

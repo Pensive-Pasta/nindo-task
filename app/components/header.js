@@ -1,9 +1,15 @@
 import { AiOutlinePlus } from 'react-icons/ai';
 
 const Header = ({ onAddTask }) => {
+    const now = new Date();
+    const formattedDate = `${now.getDate()} ${now.toLocaleString('en-GB', { month: 'long' })} ${now.getFullYear()}`;
+
     return (
         <nav className="flex justify-between items-center p-4">
-            <h1 className="text-3xl ">NINDO TASK</h1>
+            <div>
+                <h1 className="text-3xl">Nindo Task</h1>
+                <p>{formattedDate}</p>
+            </div>
             <button onClick={onAddTask} className="p-2 bg-blue-500 rounded-full shadow-2xl text-white text-2xl">
                 <AiOutlinePlus />
             </button>
