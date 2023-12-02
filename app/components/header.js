@@ -7,7 +7,7 @@ const Header = ({ onAddTask }) => {
     return (
         <nav className="flex justify-between items-center p-4">
             <div>
-                <h1 className="text-3xl">Nindo Task</h1>
+                <h1 className="text-2xl font-medium">NINDO TASK</h1>
                 <p>{formattedDate}</p>
             </div>
             <button onClick={onAddTask} className="p-2 bg-blue-500 rounded-full shadow-2xl text-white text-2xl">
