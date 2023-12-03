@@ -1,6 +1,6 @@
 const Footer = () => {
     return (
-      <footer className="bg-gray-200 text-center text-sm p-4 text-gray-700">
+      <footer className="bg-gray-200 text-center sm:text-sm text-10px p-4 text-gray-700">
         <span className="mr-2">Ricky Butcher 2023</span>|
         <a
           href="https://github.com/Pensive-Pasta"
