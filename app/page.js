@@ -1,11 +1,10 @@
 import Header from "./components/header";
-import TaskList from "./components/task-list";
-import Footer from "./components/footer";
+import TaskMain from "./components/task-main";
 
 const Home = () => {
   return <div>
     <Header />
-    <TaskList />
+    <TaskMain />
   </div>;
 };
 

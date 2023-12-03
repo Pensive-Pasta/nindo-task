@@ -1,19 +1,31 @@
 import TaskCard from "./task-card";
+import { isToday, isThisWeek } from "date-fns";
 
-const TaskList = () => {
-  const tasks = [
-    { id: 1, title: "Task 1", date: "Due date", priority: "High", completed: false },
-    { id: 2, title: "Task 2", date: "Due date", priority: "Medium", completed: false },
-    { id: 3, title: "Task 3", date: "Due date", priority: "Low", completed: false },
-  ];
-  
+const TaskList = ({ filter, tasks }) => {
+  const getFilteredTasks = () => {
+    switch (filter) {
+      case "today":
+        return tasks.filter((task) => isToday(new Date(task.date)));
+      case "week":
+        return tasks.filter((task) =>
+          isThisWeek(new Date(task.date), { weekStartsOn: 1 })
+        );
+      case "completed":
+        return tasks.filter((task) => task.completed);
+      default:
+        return tasks;
+    }
+  };
+
+  const filteredTasks = getFilteredTasks();
+
   return (
     <div>
-      {tasks.map((task) => (
+      {filteredTasks.map((task) => (
         <TaskCard key={task.id} task={task} />
       ))}
     </div>
   );
-}
+};
 
 export default TaskList;
