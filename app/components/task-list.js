@@ -3,10 +3,12 @@ import { isToday, isThisWeek } from "date-fns";
 
 const TaskList = ({ filter, tasks, onToggleCompletion }) => {
   const getFilteredTasks = () => {
+    const today = new Date();
     switch (filter) {
-      case "today":
-        return tasks.filter((task) => isToday(new Date(task.date)) && !task.completed
-        );
+        case "today":
+            return tasks.filter(task => 
+              (!task.completed && (isToday(new Date(task.date)) || new Date(task.date) < today))
+            );
       case "week":
         return tasks.filter((task) =>
           isThisWeek(new Date(task.date), { weekStartsOn: 1 }) && !task.completed

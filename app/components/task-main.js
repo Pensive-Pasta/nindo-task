@@ -8,7 +8,7 @@ const TaskMain = () => {
     {
       id: 1,
       title: "Sample Task 1",
-      date: "2023-12-03",
+      date: "2023-12-02",
       priority: "High",
       completed: false,
     },
