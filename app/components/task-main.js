@@ -26,6 +26,8 @@ const TaskMain = () => {
     {
       id: 1,
       title: "Sample Task 1",
+      description:
+        "Sample Description Stuff Blah blah blah why not use lorem ipy do dah sir",
       date: "2023-12-02",
       priority: "High",
       completed: false,

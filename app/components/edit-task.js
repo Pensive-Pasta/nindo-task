@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const EditTask = ({ task, onSave, onCancel }) => {
-  const [taskTitle, setTaskTitle] = useState('');
-  const [taskDescription, setTaskDescription] = useState('');
+  const [taskTitle, setTaskTitle] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
   const [dueDate, setDueDate] = useState(new Date());
-  const [priority, setPriority] = useState('Medium');
+  const [priority, setPriority] = useState("Medium");
   const [showDropdown, setShowDropdown] = useState(false);
   const priorities = ["High", "Medium", "Low"];
 
@@ -20,7 +20,13 @@ const EditTask = ({ task, onSave, onCancel }) => {
   }, [task]);
 
   const handleSubmit = () => {
-    onSave({ ...task, title: taskTitle, description: taskDescription, date: dueDate, priority });
+    onSave({
+      ...task,
+      title: taskTitle,
+      description: taskDescription,
+      date: dueDate,
+      priority,
+    });
   };
 
   return (
@@ -30,6 +36,7 @@ const EditTask = ({ task, onSave, onCancel }) => {
       </div>
       <input
         className="border p-2 rounded w-full mb-4"
+        maxLength="50"
         type="text"
         placeholder="Task Title"
         value={taskTitle}
@@ -37,6 +44,7 @@ const EditTask = ({ task, onSave, onCancel }) => {
       />
       <textarea
         className="border p-2 rounded w-full mb-4"
+        maxLength="500"
         placeholder="Write your description"
         value={taskDescription}
         onChange={(e) => setTaskDescription(e.target.value)}
@@ -82,8 +90,11 @@ const EditTask = ({ task, onSave, onCancel }) => {
       >
         Save Changes
       </button>
+      <button className="w-full bg-red-500 text-white p-3 rounded mt-4">
+        Delete
+      </button>
     </div>
   );
-            };
+};
 
-  export default EditTask;
+export default EditTask;

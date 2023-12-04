@@ -23,9 +23,10 @@ const AddTask = () => {
     <div className="p-4">
       <div className="text-lg text-blue-600 mb-4">
         <span>New Task</span>
-    </div>  
+      </div>
       <input
         className="border p-2 rounded w-full mb-4"
+        maxLength="50"
         type="text"
         placeholder="Task Title"
         value={taskTitle}
@@ -33,6 +34,7 @@ const AddTask = () => {
       />
       <textarea
         className="border p-2 rounded w-full mb-4"
+        maxLength="500"
         placeholder="Write your description"
         value={taskDescription}
         onChange={(e) => setTaskDescription(e.target.value)}

@@ -9,14 +9,14 @@ const Header = ({ onAddTask, isAddingTask, isEditingTask, onCancelEdit }) => {
   let button;
   if (isAddingTask) {
     button = (
-      <button onClick={onAddTask} className="text-blue-500">
-        Back
+      <button onClick={onAddTask} className="text-blue-500 mr-1">
+        Cancel
       </button>
     );
   } else if (isEditingTask) {
     button = (
-      <button onClick={onCancelEdit} className="text-blue-500">
-        Back
+      <button onClick={onCancelEdit} className="text-blue-500 mr-1">
+        Cancel
       </button>
     );
   } else {
