@@ -3,7 +3,7 @@ import TaskMain from "./components/task-main";
 
 const Home = () => {
   return <div>
-    <Header />
+    
     <TaskMain />
   </div>;
 };

@@ -2,8 +2,11 @@
 import { useState } from "react";
 import TaskFilter from "./task-filter";
 import TaskList from "./task-list";
+import Header from "./header";
+import AddTask from "./add-task";
 
 const TaskMain = () => {
+  const [showAddTask, setShowAddTask] = useState(false);  
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -44,14 +47,25 @@ const TaskMain = () => {
     setFilter(newFilter);
   };
 
+  const handleToggleAddTask = () => {
+    setShowAddTask(!showAddTask);
+  };
+
   return (
     <div>
-      <TaskFilter onFilterChange={handleFilterChange} />
-      <TaskList
-        filter={filter}
-        tasks={tasks}
-        onToggleCompletion={toggleTaskCompletion}
-      />
+      <Header onAddTask={handleToggleAddTask} />
+      {showAddTask ? (
+        <AddTask onBack={handleToggleAddTask} />
+      ) : (
+        <>
+          <TaskFilter onFilterChange={handleFilterChange} />
+          <TaskList
+            filter={filter}
+            tasks={tasks}
+            onToggleCompletion={toggleTaskCompletion}
+          />
+        </>
+      )}
     </div>
   );
 };
