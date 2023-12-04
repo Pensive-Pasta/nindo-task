@@ -1,17 +1,20 @@
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
-const AddTask = ({ onBack }) => {
+const AddTask = () => {
   const [taskTitle, setTaskTitle] = useState('');
+  const [taskDescription, setTaskDescription] = useState('');
   const [dueDate, setDueDate] = useState(new Date());
   const [priority, setPriority] = useState('Medium'); 
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleSubmit = () => {
+    console.log('id:', uuidv4());
     console.log('Task Title:', taskTitle);
-  console.log('Due Date:', dueDate);
-  console.log('Priority:', priority);
+    console.log('Due Date:', dueDate);
+    console.log('Priority:', priority);
   };
 
   const priorities = ["High", "Medium", "Low"];
@@ -24,6 +27,13 @@ const AddTask = ({ onBack }) => {
         placeholder="Task Title"
         value={taskTitle}
         onChange={(e) => setTaskTitle(e.target.value)}
+      />
+      <input 
+        className="border p-2 roundered w-full mb-4"
+        type="text field"
+        placeholder="Write your description"
+        value={taskDescription}
+        onChange={(e) => setTaskDescription(e.target.value)}
       />
       <DatePicker
         selected={dueDate}
@@ -63,7 +73,6 @@ const AddTask = ({ onBack }) => {
 
 
       
-      <button onClick={onBack} className="text-blue-500">Back</button>
       <button
         className="w-full bg-blue-500 text-white p-3 rounded"
         onClick={handleSubmit}

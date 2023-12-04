@@ -6,7 +6,7 @@ import Header from "./header";
 import AddTask from "./add-task";
 
 const TaskMain = () => {
-  const [showAddTask, setShowAddTask] = useState(false);  
+  const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -30,7 +30,8 @@ const TaskMain = () => {
       completed: false,
     },
   ]);
-  const delay = (duration) => new Promise(resolve => setTimeout(resolve, duration));
+  const delay = (duration) =>
+    new Promise((resolve) => setTimeout(resolve, duration));
 
   const toggleTaskCompletion = async (taskId) => {
     await delay(300);
@@ -53,7 +54,7 @@ const TaskMain = () => {
 
   return (
     <div>
-      <Header onAddTask={handleToggleAddTask} />
+      <Header onAddTask={handleToggleAddTask} isAddingTask={showAddTask} />
       {showAddTask ? (
         <AddTask onBack={handleToggleAddTask} />
       ) : (
