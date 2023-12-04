@@ -1,7 +1,7 @@
 import TaskCard from "./task-card";
 import { isToday, isThisWeek } from "date-fns";
 
-const TaskList = ({ filter, tasks, onToggleCompletion }) => {
+const TaskList = ({ filter, tasks, onToggleCompletion, onEditTask }) => {
   const getFilteredTasks = () => {
     const today = new Date();
     switch (filter) {
@@ -25,7 +25,7 @@ const TaskList = ({ filter, tasks, onToggleCompletion }) => {
   return (
     <div>
       {filteredTasks.map((task) => (
-        <TaskCard key={task.id} task={task} onToggleCompletion={onToggleCompletion} />
+        <TaskCard key={task.id} task={task} onToggleCompletion={onToggleCompletion} onEditTask={onEditTask} />
       ))}
     </div>
   );

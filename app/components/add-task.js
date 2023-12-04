@@ -1,26 +1,29 @@
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const AddTask = () => {
-  const [taskTitle, setTaskTitle] = useState('');
-  const [taskDescription, setTaskDescription] = useState('');
+  const [taskTitle, setTaskTitle] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
   const [dueDate, setDueDate] = useState(new Date());
-  const [priority, setPriority] = useState('Medium'); 
+  const [priority, setPriority] = useState("Medium");
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleSubmit = () => {
-    console.log('id:', uuidv4());
-    console.log('Task Title:', taskTitle);
-    console.log('Due Date:', dueDate);
-    console.log('Priority:', priority);
+    console.log("id:", uuidv4());
+    console.log("Task Title:", taskTitle);
+    console.log("Due Date:", dueDate);
+    console.log("Priority:", priority);
   };
 
   const priorities = ["High", "Medium", "Low"];
 
   return (
     <div className="p-4">
+      <div className="text-lg text-blue-600 mb-4">
+        <span>New Task</span>
+    </div>  
       <input
         className="border p-2 rounded w-full mb-4"
         type="text"
@@ -28,12 +31,12 @@ const AddTask = () => {
         value={taskTitle}
         onChange={(e) => setTaskTitle(e.target.value)}
       />
-      <input 
-        className="border p-2 roundered w-full mb-4"
-        type="text field"
+      <textarea
+        className="border p-2 rounded w-full mb-4"
         placeholder="Write your description"
         value={taskDescription}
         onChange={(e) => setTaskDescription(e.target.value)}
+        rows={2}
       />
       <DatePicker
         selected={dueDate}
@@ -43,10 +46,10 @@ const AddTask = () => {
         timeIntervals={15}
         timeCaption="time"
         dateFormat="MMMM d, yyyy h:mm aa"
-        className="border p-2 rounded w-full mb-4"
+        className="border rounded p-2 w-full mr-10 mb-4"
       />
 
-<div className="relative">
+      <div className="relative">
         <button
           className="border p-2 rounded w-full mb-4 text-left bg-white"
           onClick={() => setShowDropdown(!showDropdown)}
@@ -71,8 +74,6 @@ const AddTask = () => {
         )}
       </div>
 
-
-      
       <button
         className="w-full bg-blue-500 text-white p-3 rounded"
         onClick={handleSubmit}

@@ -2,7 +2,7 @@
 import { Switch } from "@headlessui/react";
 import { useState } from "react";
 
-const TaskCard = ({ task, onToggleCompletion }) => {
+const TaskCard = ({ task, onToggleCompletion, onEditTask }) => {
   const [enabled, setEnabled] = useState(task.completed);
   const handleToggle = () => {
     setEnabled(!enabled);
@@ -34,7 +34,7 @@ const TaskCard = ({ task, onToggleCompletion }) => {
         </div>
       </div>
       <div className="flex items-center">
-        <button className="text-sm bg-gray-200 rounded-full p-2 mr-2">
+        <button onClick={() => onEditTask(task)} className="text-sm bg-gray-200 rounded-full p-2 mr-2">
           Edit
         </button>
         <button className="text-sm bg-red-500 text-white rounded-full p-2">

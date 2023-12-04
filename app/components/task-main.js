@@ -4,8 +4,23 @@ import TaskFilter from "./task-filter";
 import TaskList from "./task-list";
 import Header from "./header";
 import AddTask from "./add-task";
+import EditTask from "./edit-task";
 
 const TaskMain = () => {
+  const [editingTask, setEditingTask] = useState(null);
+
+  const startEditTask = (task) => {
+    setEditingTask(task);
+  };
+
+  const saveTask = (updatedTask) => {
+    setEditingTask(null);
+  };
+
+  const cancelEdit = () => {
+    setEditingTask(null);
+  };
+
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([
     {
@@ -54,17 +69,30 @@ const TaskMain = () => {
 
   return (
     <div>
-      <Header onAddTask={handleToggleAddTask} isAddingTask={showAddTask} />
-      {showAddTask ? (
-        <AddTask onBack={handleToggleAddTask} />
+      <Header
+        onAddTask={handleToggleAddTask}
+        isAddingTask={showAddTask}
+        isEditingTask={!!editingTask}
+        onCancelEdit={cancelEdit}
+      />
+
+      {editingTask ? (
+        <EditTask task={editingTask} onSave={saveTask} onCancel={cancelEdit} />
       ) : (
         <>
-          <TaskFilter onFilterChange={handleFilterChange} />
-          <TaskList
-            filter={filter}
-            tasks={tasks}
-            onToggleCompletion={toggleTaskCompletion}
-          />
+          {showAddTask ? (
+            <AddTask onBack={handleToggleAddTask} />
+          ) : (
+            <>
+              <TaskFilter onFilterChange={handleFilterChange} />
+              <TaskList
+                filter={filter}
+                tasks={tasks}
+                onToggleCompletion={toggleTaskCompletion}
+                onEditTask={startEditTask}
+              />
+            </>
+          )}
         </>
       )}
     </div>
