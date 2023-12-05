@@ -1,14 +1,21 @@
 "use client";
 import { Switch } from "@headlessui/react";
 import { useState } from "react";
+import { format } from "date-fns";
 
 const TaskCard = ({ task, onToggleCompletion, onEditTask }) => {
   const [enabled, setEnabled] = useState(task.completed);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const handleToggle = () => {
-    setEnabled(!enabled);
-    onToggleCompletion(task.id);
+  const handleToggle = async () => {
+    const updatedCompletionStatus = !enabled;
+    setEnabled(updatedCompletionStatus);
+    setTimeout(() => {
+      onToggleCompletion(task._id, updatedCompletionStatus).then((success) => {
+        // if toggling failed, set back to original value
+        if (!success) setEnabled(!enabled);
+      });
+    }, 1000);
   };
 
   const toggleExpand = () => {
@@ -20,6 +27,10 @@ const TaskCard = ({ task, onToggleCompletion, onEditTask }) => {
       return text.substring(0, limit) + "...";
     }
     return text;
+  };
+
+  const formatDate = (dateString) => {
+    return format(new Date(dateString), "MMMM d, yyyy h:mm aa");
   };
 
   return (
@@ -50,7 +61,9 @@ const TaskCard = ({ task, onToggleCompletion, onEditTask }) => {
           </p>
           {isExpanded && <p className="text-xs">{task.description}</p>}
           <div className="flex items-center">
-            <p className="font-light text-gray-500 text-xs">{task.date}</p>
+            <p className="font-light text-gray-500 text-xs">
+              {formatDate(task.dueDate)}
+            </p>
             <span className=" text-blue-500 text-sm px-2 py-1 ml-2">
               {task.priority}
             </span>
