@@ -1,20 +1,37 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { createNewTask } from "../api/task-api";
 
-const AddTask = () => {
-  const [taskTitle, setTaskTitle] = useState("");
-  const [taskDescription, setTaskDescription] = useState("");
+const AddTask = ({ onBack }) => {
+  const [title, setTaskTitle] = useState("");
+  const [description, setTaskDescription] = useState("");
   const [dueDate, setDueDate] = useState(new Date());
   const [priority, setPriority] = useState("Medium");
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const handleSubmit = () => {
-    console.log("id:", uuidv4());
-    console.log("Task Title:", taskTitle);
-    console.log("Due Date:", dueDate);
-    console.log("Priority:", priority);
+  const handleSubmit = async () => {
+    const newTask = await createNewTask({
+      title,
+      description,
+      dueDate,
+      priority,
+    });
+    if (newTask) {
+      alert("New task created!");
+      onBack();
+      clearInputData();
+    } else {
+      alert("Error creating task");
+    }
+  };
+
+  const clearInputData = () => {
+    setTaskTitle("");
+    setTaskDescription("");
+    setDueDate(new Date());
+    setPriority("Medium");
+    setShowDropdown(false);
   };
 
   const priorities = ["High", "Medium", "Low"];
@@ -29,14 +46,14 @@ const AddTask = () => {
         maxLength="50"
         type="text"
         placeholder="Task Title"
-        value={taskTitle}
+        value={title}
         onChange={(e) => setTaskTitle(e.target.value)}
       />
       <textarea
         className="border p-2 rounded w-full mb-4"
         maxLength="500"
         placeholder="Write your description"
-        value={taskDescription}
+        value={description}
         onChange={(e) => setTaskDescription(e.target.value)}
         rows={2}
       />
