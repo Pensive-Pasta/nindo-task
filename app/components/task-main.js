@@ -6,10 +6,8 @@ import Header from "./header";
 import AddTask from "./add-task";
 import EditTask from "./edit-task";
 import {
-  deleteTask,
   fetchTasks,
   toggleTaskCompletion,
-  updateTask,
 } from "../api/task-api";
 
 const TaskMain = () => {
@@ -29,18 +27,6 @@ const TaskMain = () => {
 
   const startEditTask = (task) => {
     setEditingTask(task);
-  };
-
-  const saveTask = async (taskId, updatedTask) => {
-    await updateTask(taskId, updatedTask);
-    // add success and error handling
-    setEditingTask(null);
-  };
-
-  const removeTask = async (taskId) => {
-    await deleteTask(taskId);
-    // add success and error handling
-    setEditingTask(null);
   };
 
   const cancelEdit = () => {
@@ -80,7 +66,7 @@ const TaskMain = () => {
       />
 
       {editingTask ? (
-        <EditTask task={editingTask} onSave={saveTask} onDelete={removeTask} />
+        <EditTask task={editingTask} onBack={cancelEdit} />
       ) : (
         <>
           {showAddTask ? (
