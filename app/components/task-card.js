@@ -6,16 +6,19 @@ import { format } from "date-fns";
 const TaskCard = ({ task, onToggleCompletion, onEditTask }) => {
   const [enabled, setEnabled] = useState(task.completed);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [shouldBounce, setShouldBounce] = useState(false);
 
   const handleToggle = async () => {
     const updatedCompletionStatus = !enabled;
     setEnabled(updatedCompletionStatus);
+    setShouldBounce(true);
+
     setTimeout(() => {
       onToggleCompletion(task._id, updatedCompletionStatus).then((success) => {
-        // if toggling failed, set back to original value
         if (!success) setEnabled(!enabled);
+        setShouldBounce(false);
       });
-    }, 1000);
+    }, 500);
   };
 
   const toggleExpand = () => {
@@ -34,7 +37,12 @@ const TaskCard = ({ task, onToggleCompletion, onEditTask }) => {
   };
 
   return (
-    <div className="bg-gray-50 p-4 min-h-32 rounded-3xl shadow-md mb-2.5 flex justify-between items-center md:min-w-[700px]">
+    <div
+      className={`bg-gray-50 p-4 min-h-32 rounded-3xl shadow-md mb-2.5 flex justify-between items-center md:min-w-[700px] 
+    transition-colors duration-500 ease-in-out ${
+      enabled ? "bg-gray-200 opacity-50" : ""
+    } ${shouldBounce ? "animate-bounce" : ""}`}
+    >
       <div className="flex items-center space-x-4">
         <div className="min-w-11">
           <Switch
@@ -50,7 +58,9 @@ const TaskCard = ({ task, onToggleCompletion, onEditTask }) => {
           </Switch>
         </div>
         <div>
-          <h3 className="text-xl font-semibold text-black">
+          <h3
+            className={`text-xl font-semibold text-black`}
+          >
             {truncateText(task.title, 15)}
           </h3>
           <p
