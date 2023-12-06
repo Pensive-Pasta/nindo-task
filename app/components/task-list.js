@@ -9,10 +9,10 @@ const TaskList = ({ filter, tasks, onToggleCompletion, onEditTask }) => {
         return tasks.filter(task => 
           (!task.completed && (isToday(new Date(task.dueDate)) || new Date(task.dueDate) < today))
         );
-      case "week":
-        return tasks.filter((task) =>
-          isThisWeek(new Date(task.dueDate), { weekStartsOn: 1 }) && !task.completed
-        );
+        case "upcoming":
+          return tasks.filter(task => 
+            !task.completed && new Date(task.dueDate) > today
+          );
       case "completed":
         return tasks.filter((task) => task.completed);
       default:

@@ -73,7 +73,7 @@ const TaskMain = () => {
             <AddTask onBack={handleToggleAddTask} />
           ) : (
             <>
-              <TaskFilter onFilterChange={handleFilterChange} />
+              <TaskFilter currentFilter={filter} onFilterChange={handleFilterChange} />
               <TaskList
                 filter={filter}
                 tasks={tasks}
