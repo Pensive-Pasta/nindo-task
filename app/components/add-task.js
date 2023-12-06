@@ -9,21 +9,37 @@ const AddTask = ({ onBack }) => {
   const [dueDate, setDueDate] = useState(new Date());
   const [priority, setPriority] = useState("Medium");
   const [showDropdown, setShowDropdown] = useState(false);
+  const [buttonText, setButtonText] = useState("Add Task");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async () => {
-    const newTask = await createNewTask({
-      title,
-      description,
-      dueDate,
-      priority,
-    });
-    if (newTask) {
-      alert("New task created!");
-      onBack();
-      clearInputData();
-    } else {
-      alert("Error creating task");
-    }
+    setIsSubmitting(true);
+    setButtonText("Adding...");
+
+    setTimeout(async () => {
+      try {
+        const newTask = await createNewTask({
+          title,
+          description,
+          dueDate,
+          priority,
+        });
+
+        if (newTask) {
+          setButtonText("Task Added!");
+          setTimeout(() => {
+            onBack();
+            clearInputData();
+          }, 1000);
+        } else {
+          setButtonText("Failed to Add Task");
+          setTimeout(() => setIsSubmitting(false), 1000);
+        }
+      } catch (error) {
+        setButtonText("Error creating task");
+        setTimeout(() => setIsSubmitting(false), 1000);
+      }
+    }, 1000);
   };
 
   const clearInputData = () => {
@@ -32,6 +48,8 @@ const AddTask = ({ onBack }) => {
     setDueDate(new Date());
     setPriority("Medium");
     setShowDropdown(false);
+    setButtonText("Add Task");
+    setIsSubmitting(false);
   };
 
   const priorities = ["High", "Medium", "Low"];
@@ -94,10 +112,13 @@ const AddTask = ({ onBack }) => {
       </div>
 
       <button
-        className="w-full bg-blue-500 text-white p-3 rounded"
+        className={`w-full ${
+          isSubmitting ? "bg-gray-400" : "bg-blue-500"
+        } text-white p-3 rounded`}
         onClick={handleSubmit}
+        disabled={isSubmitting}
       >
-        Add Task
+        {buttonText}
       </button>
     </div>
   );
