@@ -1,5 +1,5 @@
 import TaskCard from "./task-card";
-import { isToday, isThisWeek } from "date-fns";
+import { isToday } from "date-fns";
 
 const TaskList = ({ filter, tasks, onToggleCompletion, onEditTask }) => {
   const getFilteredTasks = () => {
