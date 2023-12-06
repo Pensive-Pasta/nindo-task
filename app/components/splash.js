@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Splash = () => {
   return (
-    <div className="fixed inset-0 bg-orange-400 z-50 flex flex-col justify-center items-center space-y-4 pb-20">
+    <div className="fixed inset-0 bg-blue-400 z-50 flex flex-col justify-center items-center space-y-4 pb-20">
       <Image
         src="/images/nindologo.svg"
         width={120}
