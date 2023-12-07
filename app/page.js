@@ -2,38 +2,37 @@
 import { useState, useEffect } from 'react';
 import TaskMain from './components/task-main';
 import Splash from './components/splash';
-import { fetchTasks } from './api/task-api';
 
 const Home = () => {
   const [showSplash, setShowSplash] = useState(true);
-  const [dataLoaded, setDataLoaded] = useState(false);
+  const [fadeOutSplash, setFadeOutSplash] = useState(false);
+  const [serverReady, setServerReady] = useState(false);
+
+  const pingServer = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/ping');
+      if (response.ok) {
+        setTimeout(() => setFadeOutSplash(true), 3000);
+        setTimeout(() => setShowSplash(false), 4000);
+        setServerReady(true);
+      } else {
+        throw new Error('Server not ready');
+      }
+    } catch (error) {
+      console.error('Ping error:', error);
+      setServerReady(false);
+    }
+  };
 
   useEffect(() => {
-    const splashTimeout = setTimeout(() => setShowSplash(false), 6000);
-    const fetchData = async () => {
-      try {
-        await fetchTasks();
-        setDataLoaded(true);
-      } catch (error) {
-        console.error('Data fetching error:', error);
-        setDataLoaded(false);
-      }
-    };
-
-    fetchData();
-
-    return () => clearTimeout(splashTimeout);
+    pingServer();
   }, []);
 
-  if (showSplash || !dataLoaded) {
-    return <Splash />;
+  if (showSplash || !serverReady) {
+    return <Splash fadeOut={fadeOutSplash} />;
   }
 
-  return (
-    <div>
-      <TaskMain />
-    </div>
-  );
+  return <TaskMain />;
 };
 
 export default Home;

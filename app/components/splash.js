@@ -1,14 +1,13 @@
 import Image from "next/image";
 
-const Splash = () => {
+const Splash = ({ fadeOut }) => {
   return (
-    <div className="fixed inset-0 bg-blue-400 z-50 flex flex-col justify-center items-center space-y-4 pb-20">
+    <div className={`fixed inset-0 bg-blue-400 z-50 flex flex-col justify-center items-center space-y-4 pb-20 transition-opacity duration-1000 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}>
       <Image
         src="/images/nindologo.svg"
         width={120}
         height={120}
         alt="Nindo Task Ninja"
-        className="mr-2 mb-4"
       />
       <div className="flex items-center space-x-2">
         <h1 className="font-irish-grover text-4xl">NINDO TASK</h1>
@@ -21,6 +20,9 @@ const Splash = () => {
           />
         </div>
       </div>
+      <p className="text-white text-center mt-4">
+        Please wait, waking up the server...
+      </p>
     </div>
   );
 };
