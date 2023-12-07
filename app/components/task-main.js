@@ -5,12 +5,10 @@ import TaskList from "./task-list";
 import Header from "./header";
 import AddTask from "./add-task";
 import EditTask from "./edit-task";
-import {
-  fetchTasks,
-  toggleTaskCompletion,
-} from "../api/task-api";
+import { fetchTasks, toggleTaskCompletion } from "../api/task-api";
 
 const TaskMain = () => {
+  const [startFadeIn, setStartFadeIn] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
   const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState("today");
@@ -20,6 +18,12 @@ const TaskMain = () => {
     const fetchedTasks = await fetchTasks();
     setTasks(fetchedTasks);
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setStartFadeIn(true);
+    }, 100);
+  }, []);
 
   useEffect(() => {
     getTasks();
@@ -57,7 +61,11 @@ const TaskMain = () => {
   };
 
   return (
-    <div>
+    <div
+      className={`transition-opacity duration-2000 ease-in ${
+        startFadeIn ? "opacity-100" : "opacity-0"
+      }`}
+    >
       <Header
         onAddTask={handleToggleAddTask}
         isAddingTask={showAddTask}
@@ -73,7 +81,10 @@ const TaskMain = () => {
             <AddTask onBack={handleToggleAddTask} />
           ) : (
             <>
-              <TaskFilter currentFilter={filter} onFilterChange={handleFilterChange} />
+              <TaskFilter
+                currentFilter={filter}
+                onFilterChange={handleFilterChange}
+              />
               <TaskList
                 filter={filter}
                 tasks={tasks}

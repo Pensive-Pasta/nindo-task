@@ -1,7 +1,7 @@
-"use client"
-import { useState, useEffect } from 'react';
-import TaskMain from './components/task-main';
-import Splash from './components/splash';
+"use client";
+import { useState, useEffect } from "react";
+import TaskMain from "./components/task-main";
+import Splash from "./components/splash";
 
 const Home = () => {
   const [showSplash, setShowSplash] = useState(true);
@@ -10,16 +10,18 @@ const Home = () => {
 
   const pingServer = async () => {
     try {
-      const response = await fetch('http://localhost:3001/ping');
+      const response = await fetch("http://localhost:3001/ping");
       if (response.ok) {
-        setTimeout(() => setFadeOutSplash(true), 3000);
-        setTimeout(() => setShowSplash(false), 4000);
+        setTimeout(() => {
+          setFadeOutSplash(true);
+          setShowSplash(false);
+        }, 2000);
         setServerReady(true);
       } else {
-        throw new Error('Server not ready');
+        throw new Error("Server not ready");
       }
     } catch (error) {
-      console.error('Ping error:', error);
+      console.error("Ping error:", error);
       setServerReady(false);
     }
   };
@@ -30,9 +32,9 @@ const Home = () => {
 
   if (showSplash || !serverReady) {
     return <Splash fadeOut={fadeOutSplash} />;
+  } else {
+    return <TaskMain />;
   }
-
-  return <TaskMain />;
 };
 
 export default Home;

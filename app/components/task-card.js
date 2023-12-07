@@ -36,12 +36,16 @@ const TaskCard = ({ task, onToggleCompletion, onEditTask }) => {
     return format(new Date(dateString), "MMMM d, yyyy h:mm aa");
   };
 
+  const isTaskOverdue = !task.completed && new Date(task.dueDate) < new Date();
+
   return (
     <div
       className={`bg-gray-50 p-4 min-h-32 rounded-3xl shadow-md mb-2.5 flex justify-between items-center md:min-w-[700px] 
     transition-colors duration-500 ease-in-out ${
       enabled ? "bg-gray-200 opacity-50" : ""
-    } ${shouldBounce ? "animate-bounce" : ""}`}
+    } ${shouldBounce ? "animate-bounce" : ""} ${
+        isTaskOverdue ? "border-2 border-rose-600" : ""
+      }`}
     >
       <div className="flex items-center space-x-4">
         <div className="min-w-11">
@@ -58,9 +62,7 @@ const TaskCard = ({ task, onToggleCompletion, onEditTask }) => {
           </Switch>
         </div>
         <div>
-          <h3
-            className={`text-xl font-semibold text-black`}
-          >
+          <h3 className={`text-xl font-semibold text-black`}>
             {truncateText(task.title, 15)}
           </h3>
           <p
@@ -71,7 +73,11 @@ const TaskCard = ({ task, onToggleCompletion, onEditTask }) => {
           </p>
           {isExpanded && <p className="text-xs">{task.description}</p>}
           <div className="flex items-center">
-            <p className="font-light text-gray-500 text-xs">
+            <p
+              className={`font-light text-xs ${
+                isTaskOverdue ? "text-rose-600" : "text-gray-500"
+              }`}
+            >
               {formatDate(task.dueDate)}
             </p>
             <span className=" text-blue-500 text-sm px-2 py-1 ml-2">
@@ -84,6 +90,7 @@ const TaskCard = ({ task, onToggleCompletion, onEditTask }) => {
         <button
           onClick={() => onEditTask(task)}
           className="text-sm bg-gray-200 rounded-full p-2 mr-2"
+          disabled={task.completed}
         >
           Edit
         </button>
