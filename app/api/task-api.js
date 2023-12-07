@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3001/api";
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const fetchTasks = async () => {
   try {
@@ -75,6 +75,16 @@ export const deleteTask = async (taskId) => {
     return await response.json();
   } catch (error) {
     console.error("deleteTask error:", error);
+    throw error;
+  }
+};
+
+export const checkServer = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/ping`);
+    return response.ok;
+  } catch (error) {
+    console.error("Server check error:", error);
     throw error;
   }
 };

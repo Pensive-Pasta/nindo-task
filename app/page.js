@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import TaskMain from "./components/task-main";
 import Splash from "./components/splash";
+import { checkServer } from "./api/task-api";
 
 const Home = () => {
   const [showSplash, setShowSplash] = useState(true);
@@ -10,8 +11,8 @@ const Home = () => {
 
   const pingServer = async () => {
     try {
-      const response = await fetch("http://localhost:3001/ping");
-      if (response.ok) {
+      const serverIsReady = await checkServer();
+      if (serverIsReady) {
         setTimeout(() => {
           setFadeOutSplash(true);
           setShowSplash(false);
