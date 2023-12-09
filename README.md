@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Nindo Task
+
+Welcome to Nindo Task, a modern task management web application designed to streamline and organize your daily tasks efficiently. This application features a user-friendly interface with smooth animations and intuitive interactions, making task management an effortless experience. Nindo Task is fully responsive, ensuring a seamless user experience on devices of all sizes, from mobile phones to desktop computers.
+
+## Technologies Used
+
+- **Next.js**: For server-side rendering and building the web application.
+- **React**: To create interactive UIs for task management functionalities.
+- **Tailwind CSS**: For styling and responsive design.
+- **JavaScript**: The programming language used to build interactive features.
+- **HTML**: The markup language for structuring the content of the web application.
 
 ## Getting Started
 
-First, run the development server:
+To get a local copy up and running, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. **Clone the repository**:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`git clone https://github.com/YourUsername/nindo-task-frontend.git`
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+2. **Navigate to the project directory**:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+`cd nindo-task-frontend`
 
-## Learn More
+3. **Install dependencies**:
 
-To learn more about Next.js, take a look at the following resources:
+`npm install`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. **Run the application**:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+`npm run dev`
 
-## Deploy on Vercel
+5. **Open a web browser** and navigate to `http://localhost:3000`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+For the backend functionalities, ensure you have the backend server running. You can find the backend repository and instructions [here](https://github.com/Pensive-Pasta/nindo-task-backend).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contributing
+
+Nindo Task is a project aimed at showcasing modern web development techniques with a focus on task management solutions. While contributions are not actively sought, feedback, suggestions, or bug reports are welcome. Feel free to open an issue in the repository or contact me at pensivepasta@gmail.com.
+
+## Preview of responsive breakpoints
+
+Desktop
+<br/>
+<img src="./public/gif/desktop.gif" alt="Desktop breakpoint" width="600">
+
+Mobile
+<br/>
+<img src="./public/gif/mobile.gif" alt="Mobile breakpoint" width="200">
+
