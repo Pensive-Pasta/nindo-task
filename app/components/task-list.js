@@ -31,7 +31,7 @@ const TaskList = ({ filter, tasks, onToggleCompletion, onEditTask }) => {
       ) : (
         <div className="flex flex-col items-center justify-center mt-10">
       <p className="text-center text-gray-500 text-lg">
-        You're all caught up! <br />
+        You&apos;re all caught up! <br />
         Add a new task to get started.
       </p>
     </div>
