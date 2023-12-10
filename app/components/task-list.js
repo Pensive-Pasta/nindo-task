@@ -24,10 +24,19 @@ const TaskList = ({ filter, tasks, onToggleCompletion, onEditTask }) => {
 
   return (
     <div>
-      {filteredTasks.map((task) => (
-        <TaskCard key={task._id} task={task} onToggleCompletion={onToggleCompletion} onEditTask={onEditTask} />
-      ))}
+      {filteredTasks.length > 0 ? (
+        filteredTasks.map((task) => (
+          <TaskCard key={task._id} task={task} onToggleCompletion={onToggleCompletion} onEditTask={onEditTask} />
+        ))
+      ) : (
+        <div className="flex flex-col items-center justify-center mt-10">
+      <p className="text-center text-gray-500 text-lg">
+        You're all caught up! <br />
+        Add a new task to get started.
+      </p>
     </div>
+  )}
+</div>
   );
 };
 
