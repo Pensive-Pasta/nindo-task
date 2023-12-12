@@ -1,6 +1,6 @@
 const TaskFilter = ({ currentFilter, onFilterChange }) => {
   return (
-    <div className="flex justify-between space-x-4 p-4 text-lg">
+    <div className="flex justify-between p-4 text-lg">
       <button 
         onClick={() => onFilterChange('today')}
         className={`text-blue-600 ${currentFilter === 'today' ? 'font-bold' : ''}`}
@@ -9,7 +9,7 @@ const TaskFilter = ({ currentFilter, onFilterChange }) => {
       </button>
       <button 
         onClick={() => onFilterChange('upcoming')}
-        className={`text-blue-600 ${currentFilter === 'upcoming' ? 'font-bold' : ''}`}
+        className={`text-blue-600 ml-6 ${currentFilter === 'upcoming' ? 'font-bold' : ''}`}
       >
         Upcoming
       </button>
