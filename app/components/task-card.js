@@ -63,7 +63,7 @@ const TaskCard = ({ task, onToggleCompletion, onEditTask }) => {
         </div>
         <div>
           <h3 className={`text-xl font-semibold text-black`}>
-            {truncateText(task.title, 15)}
+            {truncateText(task.title, 50)}
           </h3>
           <p
             className="text-xs text-blue-500 cursor-pointer"
